@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { MantineProvider, createTheme } from "@mantine/core";
+import { BrowserRouter } from 'react-router-dom';
 
 const appColors = [
   "#eef3ff",
@@ -18,7 +19,7 @@ const appColors = [
 ];
 
 const theme = createTheme({
-  primaryColor: "gray",
+  primaryColor: "indigo",
   colors: {
     appColors,
   }
@@ -27,7 +28,9 @@ const theme = createTheme({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <MantineProvider theme={theme} defaultColorScheme="auto" withCssVariables>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </MantineProvider>
   </React.StrictMode>,
 );

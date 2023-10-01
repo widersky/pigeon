@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
-import HoursCalcView from "./views/HoursCalc.view";
 import '@mantine/core/styles.css';
 import AppTopBar from "./components/AppTopBar";
 import { Badge, NavLink, Stack } from "@mantine/core";
-import { IconCalculator, IconRepeat, IconRobot } from "@tabler/icons-react";
+import { IconCalculator, IconCalendarRepeat, IconCoins, IconCrystalBall, IconMoneybag, IconRepeat, IconRobot } from "@tabler/icons-react";
+import { Link, Route, Routes } from "react-router-dom";
+
+// Views
+import HoursCalcView from "./views/HoursCalc.view";
+import RegularExpenses from "./views/RegularExpenses";
 
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
@@ -22,14 +26,21 @@ function App() {
 
         {/* Nav */}
         <Stack p={8} gap={2}>
-          <NavLink className="rounded" label="Kalkulator wynagrodzenia" leftSection={<IconCalculator size="1rem" stroke={1.5} />} active />
-          <NavLink className="rounded" label="Symulator przyszłości" leftSection={<IconRobot size="1rem" stroke={1.5} />} rightSection={<Badge size="xs">Beta</Badge>} />
-          <NavLink className="rounded" label="Regularne wydatki" leftSection={<IconRepeat size="1rem" stroke={1.5} />} />
+          <NavLink label="Zestawienia" disabled />
+          <NavLink component={Link} to="/regular-incomes" className="rounded" label="Regularne dochody" leftSection={<IconMoneybag size="1rem" stroke={1.5} />} />
+          <NavLink component={Link} to="/regular-expenses" className="rounded" label="Regularne wydatki" leftSection={<IconCoins size="1rem" stroke={1.5} />} />
+
+          <NavLink label="Narzędzia" disabled />
+          <NavLink component={Link} to="/" className="rounded" label="Kalkulator wynagrodzenia" leftSection={<IconCalendarRepeat size="1rem" stroke={1.5} />} active />
+          <NavLink component={Link} className="rounded" label="Symulator przyszłości" leftSection={<IconCrystalBall size="1rem" stroke={1.5} />} rightSection={<Badge size="xs">Beta</Badge>} />
         </Stack>
       </div>
       <div className="flex flex-col w-full">
         <AppTopBar />
-        <HoursCalcView />
+        <Routes>
+          <Route path="/" element={<HoursCalcView />} />
+          <Route path="/regular-expenses" element={<RegularExpenses />} />
+       </Routes>
       </div>
     </div>
   );

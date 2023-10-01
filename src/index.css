@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  @apply overflow-hidden;
+}
+
 *:not(input) {
   @apply select-none cursor-default !important;
 }
